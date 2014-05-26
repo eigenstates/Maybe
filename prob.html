@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Prob</title>
+	<script src="probSound.js" type="text/javascript" charset="utf-8" async defer></script>
+	<script src="16Probability.js" type="text/javascript" charset="utf-8" async defer></script>
+	<script src="controls.js" type="text/javascript" charset="utf-8" async defer></script>
+	<link rel="stylesheet" type="text/css" href="prob.css">
+	<style type="text/css" media="screen">
+		#color{
+			width: 100%;
+			height: 500px;
+		}
+		.channel{
+			width:20%;
+			float:left;
+			padding:10px;
+		}
+		.chColorBlock{
+			height:100px;
+		}
+		}
+		input{
+			width:90%;
+			text-align: right
+		}
+		form{
+			border: dotted;
+			border-color: black;
+		}	
+	</style>
+</head>
+<body onload="playAudio()">
+
+	<div id="color">
+<div class='channel' id='red'>
+	<div class='chColorBlock' style="background:red">PART A</div>
+	<br>
+	<form style="background:red">
+		<input type="range" name="fooRed" min="0" max="100">
+		<output for="fooRed" onforminput="value = fooRed.valueAsNumber;"></output>
+	</form>
+	<form style="background:orange">
+		<input type="range" name="fooOrange" min="0" max="100">
+		<output for="fooOrange" onforminput="value = fooOrange.valueAsNumber;"></output>
+	</form>
+	<form style="background:blue">
+		<input type="range" name="fooBlue" min="0" max="100">
+		<output for="fooBlue" onforminput="value = fooBlue.valueAsNumber;"></output>
+	</form>
+		<form style="background:green">
+		<input type="range" name="fooGreen" min="0" max="100">
+		<output for="fooGreen" onforminput="value = fooGreen.valueAsNumber;"></output>
+	</form>
+</div>
+<div class='channel' id='orange'>
+	<div class='chColorBlock' style="background:orange">PART B</div>
+	<br>
+	<form style="background:red">
+		<input type="range" name="fooRed" min="0" max="100">
+		<output for="fooRed" onforminput="value = fooRed.valueAsNumber;"></output>
+	</form>
+
+	<form style="background:orange">
+		<input type="range" name="fooOrange" min="0" max="100">
+		<output for="fooOrange" onforminput="value = fooOrange.valueAsNumber;"></output>
+	</form>
+
+	<form style="background:blue">
+		<input type="range" name="fooBlue" min="0" max="100">
+		<output for="fooBlue" onforminput="value = fooBlue.valueAsNumber;"></output>
+	</form>
+		<form style="background:green">
+		<input type="range" name="fooGreen" min="0" max="100">
+		<output for="fooGreen" onforminput="value = fooGreen.valueAsNumber;"></output>
+	</form>
+</div>
+<div class='channel' id='blue'>
+	<div class='chColorBlock' style="background:blue">PART C</div>
+	<br>
+	<form style="background:red">
+		<input type="range" name="fooRed" min="0" max="100">
+		<output for="fooRed" onforminput="value = fooRed.valueAsNumber;"></output>
+	</form>
+
+	<form style="background:orange">
+		<input type="range" name="fooOrange" min="0" max="100">
+		<output for="fooOrange" onforminput="value = fooOrange.valueAsNumber;"></output>
+	</form>
+
+	<form style="background:blue">
+		<input type="range" name="fooBlue" min="0" max="100">
+		<output for="fooBlue" onforminput="value = fooBlue.valueAsNumber;"></output>
+	</form>
+		<form style="background:green">
+		<input type="range" name="fooGreen" min="0" max="100">
+		<output for="fooGreen" onforminput="value = fooGreen.valueAsNumber;"></output>
+	</form>
+</div>
+<div class='channel' id='green'>
+	<div class='chColorBlock' style="background:green">PART D</div>
+	<br>
+	<form style="background:red">
+		<input type="range" name="fooRed" min="0" max="100">
+		<output for="fooRed" onforminput="value = fooRed.valueAsNumber;"></output>
+	</form>
+	<form style="background:orange">
+		<input type="range" name="fooOrange" min="0" max="100">
+		<output for="fooOrange" onforminput="value = fooOrange.valueAsNumber;"></output>
+	</form>
+	<form style="background:blue">
+		<input type="range" name="fooBlue" min="0" max="100">
+		<output for="fooBlue" onforminput="value = fooBlue.valueAsNumber;"></output>
+	</form>
+	<form style="background:green">
+		<input type="range" name="fooGreen" min="0" max="100">
+		<output for="fooGreen" onforminput="value = fooGreen.valueAsNumber;"></output>
+	</form>
+</div>
+</div>
+</body>
+</html>

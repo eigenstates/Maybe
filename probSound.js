@@ -11,7 +11,7 @@ var Sound = function(){
       loadBuffer(request.response, cb)
     }, false );
 
-    request.open( 'GET', file, true );
+    request.open( 'GET', encodeURI(file), true );
     request.responseType = "arraybuffer";
     request.send();
   }

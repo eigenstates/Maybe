@@ -16,7 +16,7 @@ var parts = [
 					{index:2, weight:.05},
 					{index:3, weight:.05}],
 		
-		files:[	{file:"111 BS Simrock.wav", weight:.99},
+		files:[	{file:"111BSSimrock.wav", weight:.99},
 				{file:"hh0a.mp3", weight:.01}],
 		color:"red"
 	},
@@ -27,7 +27,7 @@ var parts = [
 					{index:2, weight:.15},
 					{index:3, weight:.05}],
 
-		files:[	{file:"111 BS Simrock NK.wav", weight:.99},
+		files:[	{file:"111BSSimrockNK.wav", weight:.99},
 				{file:"hh1a.mp3", weight:.01}],
 		color:"orange"
 	},
@@ -39,7 +39,7 @@ var parts = [
 					{index:2, weight:.05},
 					{index:3, weight:.45},],
 
-		files:[	{file:"111 BS Simrock Rd.wav", weight:.99},
+		files:[	{file:"111BSSimrockRd.wav", weight:.99},
 				{file:"hh2a.mp3", weight:.01}],
 		color:"blue"
 	},
@@ -50,7 +50,7 @@ var parts = [
 					{index:2, weight:.24},
 					{index:3, weight:.01}],
 
-		files:[	{file:"111 BS Simrock Rd Fill 1.wav", weight:.99},
+		files:[	{file:"111BSSimrockRdFill1.wav", weight:.99},
 				{file:"hh3a.mp3", weight:.01}],
 		color:"green"
 	}

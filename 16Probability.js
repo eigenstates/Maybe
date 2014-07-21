@@ -71,7 +71,7 @@ function pckLoop(){
 	part = getRandomItem(part.nextWeight);	
 	//playAudio();
 }
-var finished = false
+var playing = false
 var part = parts[0];
 function playAudio(){
 	console.log(part.name)
@@ -91,6 +91,13 @@ function playAudio(){
 
 }
 
+function makeItSo(){
+	if(playing === true){
+		return
+	}
+	playing = true
+	playAudio()
+}
 function startPlayTimer(duration){
 
 		if(currentIndex<24){
@@ -104,6 +111,7 @@ function startPlayTimer(duration){
 			},duration.toFixed(4)*1000);
 		}
 		else{
+			playing= false
 			console.log("END")
 		}
 		

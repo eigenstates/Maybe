@@ -63,11 +63,11 @@ var Sound = function(){
     play: function(){
       // Play back the sound immediately
       //console.log("play", source)
-      source.noteOn( 0 );
+      source.start( );
 
     },
     stop: function(){
-      source.noteOff( 0 );
+      source.stop( );
     },
     loop: function(){
         // Loop the playback of the source

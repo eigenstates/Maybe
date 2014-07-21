@@ -3,7 +3,7 @@ var lastPickedIndividual;
 var lastPickedSequence = []
 var mainContext = new webkitAudioContext();
 // Create a AudioGainNode to control the main volume.
-var mainVolume = mainContext.createGainNode();
+var mainVolume = mainContext.createGain();
 // Connect the main volume node to the context destination.
 mainVolume.connect(mainContext.destination);
 mainVolume.gain.value = .8;
@@ -69,7 +69,7 @@ var currentIndex =  0
 var colorElm = document.getElementById("color");
 function pckLoop(){
 	part = getRandomItem(part.nextWeight);	
-	playAudio();
+	//playAudio();
 }
 var finished = false
 var part = parts[0];
@@ -83,26 +83,35 @@ function playAudio(){
 		audio.play()
 
 		currentIndex ++;
+		
+		startPlayTimer(duration)
 
-		if(currentIndex<24){
-			console.log("currentDuration " + duration)
-			var timer = setTimeout(function(){
-				clearTimeout(timer)
-				pckLoop()
-			},duration.toFixed(3)*1000);
-		}
-		else{
-			console.log("END")
-		}
+		//requestAnimationFrame(colorChanger)
 	})
 
 }
 
-function playAndPick(){
+function startPlayTimer(duration){
 
+		if(currentIndex<24){
+			console.log("currentDuration " + duration)
+			//Pick it
+			pckLoop()
+			//Wait to Play the next as long as the one that we just loaded
+			var timer = setTimeout(function(){
+				clearTimeout(timer)
+				playAudio()
+			},duration.toFixed(4)*1000);
+		}
+		else{
+			console.log("END")
+		}
 		
 }
 
+function colorChanger(){
+
+}
 var rand = function(min, max) {
     return Math.random() * (max - min) + min;
 };

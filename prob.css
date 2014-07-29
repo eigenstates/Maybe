@@ -1,20 +1,4 @@
-output { 
-  position: absolute;
-  background-image: linear-gradient(#444444, #999999);
-  width: 40px; 
-  height: 30px; 
-  text-align: center; 
-  color: white; 
-  border-radius: 5px; 
-  display: inline-block; 
-  font: bold 15px/30px Georgia;
-  bottom: 25%;
-  left: 0;
-}
-
-form { position: relative; padding-top: 25px; width: 100%; }
-
-#color{
+  #color{
   width: 100%;
   height: 500px;
 }
@@ -25,8 +9,59 @@ form { position: relative; padding-top: 25px; width: 100%; }
 }
 .chColorBlock{
   height:100px;
+  font-family:'Tahoma';
+  font-size: 30px;
+  color:white;
+  text-align: center;
+  text-shadow: 2px 2px #000;
+    border-radius: 5px;
+  box-shadow: inset 0 0 15px #333;
 }
-input{
-  width:90%;
-  text-align: right
+
+.red{
+  background: red;
+}
+.blue{
+  background: blue;
+}
+.green{
+  background: green;
+}
+.orange{
+  background: orange;
+}
+
+
+input[type='range'] {
+  -webkit-appearance: none;
+  border-radius: 5px;
+  box-shadow: inset 0 0 15px #333;
+  height: 20px;
+  vertical-align: middle;
+  width:100%;
+}
+input[type='range']::-moz-range-track {
+  -moz-appearance: none;
+  border-radius: 5px;
+  box-shadow: inset 0 0 5px #333;
+  height: 20px;
+  width: 100%;
+}
+input[type='range']::-webkit-slider-thumb {
+  -webkit-appearance: none !important;
+  border-radius: 20px;
+  background-color: #FFF;
+  box-shadow:inset 0 0 10px rgba(000,000,000,0.5);
+  border: 1px solid #999;
+  height: 20px;
+  width: 20px;
+}
+input[type='range']::-moz-range-thumb {
+  -moz-appearance: none;
+  border-radius: 20px;
+  background-color: #FFF;
+  box-shadow:inset 0 0 10px rgba(000,000,000,0.5);
+  border: 1px solid #999;
+  height: 20px;
+  width: 20px;
 }

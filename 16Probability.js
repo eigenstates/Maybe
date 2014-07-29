@@ -9,7 +9,7 @@ mainVolume.connect(mainContext.destination);
 mainVolume.gain.value = .8;
 var parts = [
 	{
-		name:'Part A',
+		name:'PartA',
 		nextWeight:[
 					{index:0, weight:.30},
 					{index:1, weight:.60},
@@ -21,7 +21,7 @@ var parts = [
 		color:"red"
 	},
 	{
-		name:'Part B',
+		name:'PartB',
 		nextWeight:[{index:0, weight:.45},
 					{index:1, weight:.35},
 					{index:2, weight:.15},
@@ -32,7 +32,7 @@ var parts = [
 		color:"orange"
 	},
 	{
-		name:'Part C',
+		name:'PartC',
 		nextWeight:[
 					{index:0, weight:.30},
 					{index:1, weight:.25},
@@ -44,7 +44,7 @@ var parts = [
 		color:"blue"
 	},
 	{
-		name:'Part D',
+		name:'PartD',
 		nextWeight:[{index:0, weight:.70},
 					{index:1, weight:.05},
 					{index:2, weight:.24},
@@ -112,6 +112,7 @@ function startPlayTimer(duration){
 		}
 		else{
 			playing= false
+			currentIndex = 0
 			console.log("END")
 		}
 		
@@ -135,6 +136,7 @@ var getRandomItem = function(weightArray) {
     });
     
     //could be just 0-1 
+    var weight = (total_weight.weight>1)?1:total_weight.weight;
     var random_num = rand(0, total_weight.weight);
     var weight_sum = 0;
     console.log(random_num)
@@ -142,8 +144,12 @@ var getRandomItem = function(weightArray) {
     for (var i = 0; i < parts.length; i++) {
         weight_sum += weightArray[i].weight;
         weight_sum =+ weight_sum.toFixed(2);
+        if(weight_sum > 1){
+        	weight_sum = 1;
+        }
         if (random_num <= weight_sum) {
             return parts[weightArray[i].index]
         }
     }
+    return parts[0]
 };

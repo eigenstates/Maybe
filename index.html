@@ -8,93 +8,103 @@
 	<link rel="stylesheet" type="text/css" href="prob.css" screen="media">
 	<script src="probSound.js" type="text/javascript" charset="utf-8"></script>
 	<script src="16Probability.js" type="text/javascript" charset="utf-8" async defer></script>
-	<script src="controls.js" type="text/javascript" charset="utf-8" async defer></script>
+	<script type="text/javascript" charset="utf-8">
+		function changeHandler(elm){
+			var el = elm.srcElement
+			parts.forEach(function(part){
+				if (part.name == el.parentNode.id){
+					var val = el.value/100
+					var colorIndex;
+
+					switch(el.className){
+						case 'red':
+							colorIndex =0
+						break
+						case 'orange':
+							colorIndex =1
+						break
+						case 'blue':
+							colorIndex =2
+						break
+						case 'green':
+							colorIndex =3
+						break
+					}
+
+					for (var i = 0; i < part.nextWeight.length; i++) {
+						if(part.nextWeight[i].index == colorIndex){
+							part.nextWeight[i].weight = val
+						}
+					};
+				}
+			})
+		}
+		function handles(){
+			var inputs = document.getElementsByTagName("input");
+			for (i=0; i<inputs.length; i++){
+				var elm = inputs[i];
+		   		elm.onchange = changeHandler;
+		   		if (i<4){
+		   			elm.value = parts[0].nextWeight[i].weight*100;
+		   		}
+		   		else if(i<8){
+		   			elm.value = parts[1].nextWeight[i-4].weight*100;
+		   		}
+		   		else if(i<12){
+		   			elm.value = parts[2].nextWeight[i-8].weight*100;
+		   		}
+		   		else if(i<16){
+		   			elm.value = parts[3].nextWeight[i-12].weight*100;
+		   		}
+			}
+		}
+	</script>
 </head>
-<body>
-	<div id="color" onclick='makeItSo()'>
-		<div class='channel' id='red'>
-			<div class='chColorBlock' style="background:red">PART A</div>
+<body onload="handles()">
+	<div id="color">
+		<div class='channel' id='PartA'>
+			<div class='chColorBlock' style="background:red" onclick="makeItSo()">PART A</div>
 			<br>
-			<form style="background:red">
-				<input type="range" name="fooRed" min="0" max="100">
-				<output for="fooRed" onforminput="value = fooRed.valueAsNumber;"></output>
-			</form>
-			<form style="background:orange">
-				<input type="range" name="fooOrange" min="0" max="100">
-				<output for="fooOrange" onforminput="value = fooOrange.valueAsNumber;"></output>
-			</form>
-			<form style="background:blue">
-				<input type="range" name="fooBlue" min="0" max="100">
-				<output for="fooBlue" onforminput="value = fooBlue.valueAsNumber;"></output>
-			</form>
-				<form style="background:green">
-				<input type="range" name="fooGreen" min="0" max="100">
-				<output for="fooGreen" onforminput="value = fooGreen.valueAsNumber;"></output>
-			</form>
+			<input class="red" type="range" min="0" max="100">
+
+			<input class="orange" type="range" min="0" max="100">
+
+			<input class="blue" type="range" min="0" max="100">
+
+			<input class="green" type="range" min="0" max="100">
 		</div>
-		<div class='channel' id='orange'>
+		<div class='channel' id='PartB'>
 			<div class='chColorBlock' style="background:orange">PART B</div>
 			<br>
-			<form style="background:red">
-				<input type="range" name="fooRed" min="0" max="100">
-				<output for="fooRed" onforminput="value = fooRed.valueAsNumber;"></output>
-			</form>
+			<input class="red" type="range" min="0" max="100">
 
-			<form style="background:orange">
-				<input type="range" name="fooOrange" min="0" max="100">
-				<output for="fooOrange" onforminput="value = fooOrange.valueAsNumber;"></output>
-			</form>
+			<input class="orange" type="range" min="0" max="100">
 
-			<form style="background:blue">
-				<input type="range" name="fooBlue" min="0" max="100">
-				<output for="fooBlue" onforminput="value = fooBlue.valueAsNumber;"></output>
-			</form>
-				<form style="background:green">
-				<input type="range" name="fooGreen" min="0" max="100">
-				<output for="fooGreen" onforminput="value = fooGreen.valueAsNumber;"></output>
-			</form>
+			<input class="blue" type="range" min="0" max="100">
+
+			<input class="green" type="range" min="0" max="100">
 		</div>
-		<div class='channel' id='blue'>
+		<div class='channel' id='PartC'>
 			<div class='chColorBlock' style="background:blue">PART C</div>
 			<br>
-			<form style="background:red">
-				<input type="range" name="fooRed" min="0" max="100">
-				<output for="fooRed" onforminput="value = fooRed.valueAsNumber;"></output>
-			</form>
+			<input class="red" type="range" min="0" max="100">
 
-			<form style="background:orange">
-				<input type="range" name="fooOrange" min="0" max="100">
-				<output for="fooOrange" onforminput="value = fooOrange.valueAsNumber;"></output>
-			</form>
+			<input class="orange" type="range" min="0" max="100">
 
-			<form style="background:blue">
-				<input type="range" name="fooBlue" min="0" max="100">
-				<output for="fooBlue" onforminput="value = fooBlue.valueAsNumber;"></output>
-			</form>
-				<form style="background:green">
-				<input type="range" name="fooGreen" min="0" max="100">
-				<output for="fooGreen" onforminput="value = fooGreen.valueAsNumber;"></output>
-			</form>
+			<input class="blue" type="range" min="0" max="100">
+
+			<input class="green" type="range" min="0" max="100">
 		</div>
-		<div class='channel' id='green'>
+		<div class='channel' id='PartD'>
 			<div class='chColorBlock' style="background:green">PART D</div>
 			<br>
-			<form style="background:red">
-				<input type="range" name="fooRed" min="0" max="100">
-				<output for="fooRed" onforminput="value = fooRed.valueAsNumber;"></output>
-			</form>
-			<form style="background:orange">
-				<input type="range" name="fooOrange" min="0" max="100">
-				<output for="fooOrange" onforminput="value = fooOrange.valueAsNumber;"></output>
-			</form>
-			<form style="background:blue">
-				<input type="range" name="fooBlue" min="0" max="100">
-				<output for="fooBlue" onforminput="value = fooBlue.valueAsNumber;"></output>
-			</form>
-			<form style="background:green">
-				<input type="range" name="fooGreen" min="0" max="100">
-				<output for="fooGreen" onforminput="value = fooGreen.valueAsNumber;"></output>
-			</form>
+			<input class="red" type="range" min="0" max="100">
+
+			<input class="orange" type="range" min="0" max="100">
+
+			<input class="blue" type="range" min="0" max="100">
+
+			<input class="green" type="range" min="0" max="100">
 		</div>
 	</div>
 </body>

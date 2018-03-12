@@ -1,126 +1,100 @@
 var map = []
 var lastPickedIndividual;
-var lastPickedSequence = []
-var mainContext = new webkitAudioContext();
+var lastPickedSequence = [];
+
+var theseParts = parts;
+var mainContext = new window.AudioContext();
 // Create a AudioGainNode to control the main volume.
 var mainVolume = mainContext.createGain();
 // Connect the main volume node to the context destination.
 mainVolume.connect(mainContext.destination);
-mainVolume.gain.value = .8;
-var parts = [
-	{
-		name:'PartA',
-		nextWeight:[
-					{index:0, weight:.30},
-					{index:1, weight:.60},
-					{index:2, weight:.05},
-					{index:3, weight:.05}],
-		
-		files:[	{file:"111BSSimrock.wav", weight:.99},
-				{file:"hh0a.mp3", weight:.01}],
-		color:"red"
-	},
-	{
-		name:'PartB',
-		nextWeight:[{index:0, weight:.45},
-					{index:1, weight:.35},
-					{index:2, weight:.15},
-					{index:3, weight:.05}],
+mainVolume.gain.value = 0.8;
 
-		files:[	{file:"111BSSimrockNK.wav", weight:.99},
-				{file:"hh1a.mp3", weight:.01}],
-		color:"orange"
-	},
-	{
-		name:'PartC',
-		nextWeight:[
-					{index:0, weight:.30},
-					{index:1, weight:.25},
-					{index:2, weight:.05},
-					{index:3, weight:.45},],
 
-		files:[	{file:"111BSSimrockRd.wav", weight:.99},
-				{file:"hh2a.mp3", weight:.01}],
-		color:"blue"
-	},
-	{
-		name:'PartD',
-		nextWeight:[{index:0, weight:.70},
-					{index:1, weight:.05},
-					{index:2, weight:.24},
-					{index:3, weight:.01}],
-
-		files:[	{file:"111BSSimrockRdFill1.wav", weight:.99},
-				{file:"hh3a.mp3", weight:.01}],
-		color:"green"
+function preLoadAudio(){
+	for (var i=0;i<theseParts.length;i++){
+		var files = theseParts[i].files;
+		for (var x = 0; x < files.length; x++) {
+			var audio = new Audio();
+			audio.addEventListener('canplaythrough', onAudioLoad, false);
+			audio.src =  '/loops/' + files[x].file;
+		}
 	}
-]
+}
+var loaded = 0;
+function onAudioLoad(){
+	loaded++;
+	if(loaded == 4 ){ //because we know. Figure better way
+		playing = true;
+		playAudio(theseParts[0]);
+	}
+}
 
 //Idea here is that patterns of MaxPatternInBar has an effect 
 //of those patterns reappearing. 
 //Possibly- increasing the weight of 'a after b' becuase it happens in currentPattern.
 //until all that is left is 'a always follows b'
-var MaxPatternInBar = 4 
+var MaxPatternInBar = 4;
 
-var audio = new Sound();
-
-var currentIndex =  0
+var audioSample = new Sound();
+var audioElement = new Audio();
+var currentPart;
+var currentIndex =  0;
 
 var colorElm = document.getElementById("color");
 function pckLoop(){
-	part = getRandomItem(part.nextWeight);	
-	//playAudio();
+	var part = getRandomItem(currentPart.nextWeight);	
+	return part;
 }
-var playing = false
-var part = parts[0];
-function playAudio(){
-	console.log(part.name)
-	//loadSound(part.files[0].file)
-	audio.loadFile("loops/" +part.files[0].file, function(source, duration){
-		console.log(part.files[0].file)
-		source.connect(mainVolume)
-		colorElm.style['backgroundColor'] = part.color
-		audio.play()
+var playing = false;
+function playAudio(part){
+	console.log(part.name);
+	currentPart = part;
+	// audioElement.src = '/loops/'+ part.files[0].file; //0 will change when more files added
+	// audioElement.addEventListener('loadedmetadata', function() {	
+	// 	audioElement.play();
+	// 	startPlayTimer(audioElement.duration);
+	//});
+	audioSample.loadFile("loops/" +part.files[0].file, function(sample){
+		console.log(part.files[0].file);
+		sample.connect(mainVolume);
+		colorElm.style['backgroundColor'] = part.color;
+		sample.start(0);
 
 		currentIndex ++;
 		
-		startPlayTimer(duration)
-
-		//requestAnimationFrame(colorChanger)
-	})
+		startPlayTimer(sample.buffer.duration);
+	});
 
 }
 
 function makeItSo(){
 	if(playing === true){
-		return
+		return;
 	}
-	playing = true
-	playAudio()
+	playing = true;
+	playAudio(theseParts[0]);
 }
 function startPlayTimer(duration){
 
 		if(currentIndex<24){
-			console.log("currentDuration " + duration)
+			console.log("currentDuration " + duration);
 			//Pick it
-			pckLoop()
+			var newPart = pckLoop();
 			//Wait to Play the next as long as the one that we just loaded
 			var timer = setTimeout(function(){
-				clearTimeout(timer)
-				playAudio()
+				clearTimeout(timer);
+				playAudio(newPart);
 			},duration.toFixed(4)*1000);
 		}
 		else{
-			playing= false
-			currentIndex = 0
-			console.log("END")
+			playing= false;
+			currentIndex = 0;
+			console.log("END");
 		}
 		
 }
 
-function colorChanger(){
-
-}
 var rand = function(min, max) {
     return Math.random() * (max - min) + min;
 };
@@ -139,7 +113,7 @@ var getRandomItem = function(weightArray) {
     var weight = (total_weight.weight>1)?1:total_weight.weight;
     var random_num = rand(0, total_weight.weight);
     var weight_sum = 0;
-    console.log(random_num)
+    console.log(random_num);
      
     for (var i = 0; i < parts.length; i++) {
         weight_sum += weightArray[i].weight;
@@ -148,8 +122,10 @@ var getRandomItem = function(weightArray) {
         	weight_sum = 1;
         }
         if (random_num <= weight_sum) {
-            return parts[weightArray[i].index]
+            return parts[weightArray[i].index];
         }
     }
-    return parts[0]
+    return parts[0];
 };
+
+preLoadAudio();
